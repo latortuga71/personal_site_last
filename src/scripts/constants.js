@@ -40,8 +40,7 @@ AZ-500      ttys009      Nov 18 02:80
 MS-500      ttys010      Nov 19 12:00
 AZ-104      ttys011      Nov 20 01:00
 SEC+        ttys012      Nov 21 11:00
-CCNA        ttys013      Nov 22 12:00
-`
+CCNA        ttys013      Nov 22 12:00`
 
 export const whoamiMessage = `{
   "Name": "christopher",
@@ -56,12 +55,12 @@ export const whoamiMessage = `{
 }`
 
 export const jobsMessage = 
-`[1]-  Running                IBM                            'Innovation/Remediation Engineer'                   2021 - Present
-[2]-  Running                Cobalt.io                      'Pentester'                                         2021 - Present
-[3]   Stopped: 15            Conquest Cyber                 'Cyber Security Engineer/DevSecOps'                 2020 - 2021
-[4]   Stopped: 15            Health Channels                'Cyber Security Analyst'                            2020 - 2021
-[5]-  Stopped: 15            United Data Technologies       'SOC Engineer/Python Dev'                           2018 - 2019
-[6]+  Stopped: 15            LanInfoTech                    'HelpDesk Engineer'                                 2017 - 2018`
+`[1]-  Running                IBM                            'Innovation/Remediation Engineer'
+[2]-  Running                Cobalt.io                      'Pentester'
+[3]   Stopped: 15            Conquest Cyber                 'Cyber Security Engineer/DevSecOps'
+[4]   Stopped: 15            Health Channels                'Cyber Security Analyst'
+[5]-  Stopped: 15            United Data Technologies       'SOC Engineer/Python Dev'
+[6]+  Stopped: 15            LanInfoTech                    'HelpDesk Engineer'`
 
 
 /*
