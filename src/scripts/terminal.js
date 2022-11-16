@@ -73,7 +73,7 @@ async function HandleDownload(file) {
 }
 
 async function loadFileInfo(file) { 
-    const res = await fetch(file)
+    const res = await fetch("../"+file)
     const fileContents = await res.text();
     const fileLength = fileContents.length;
     let entry = `-rw-r--r--    ${fileLength} latortuga0x71  staff      39 Nov 11 20:39 ${file}`;
