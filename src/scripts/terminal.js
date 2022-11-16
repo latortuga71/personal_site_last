@@ -60,15 +60,15 @@ async function HandleDownload(file) {
         terminalWrite(`download: ${file}: No such file or directory`);
         return;
     }
-    const fileContents = await res.blob;
-    // create a new handle
-    const newHandle = await window.showSaveFilePicker();
-    // create a FileSystemWritableFileStream to write to
-    const writableStream = await newHandle.createWritable();
-    // write our file
-    await writableStream.write(fileContents);
-    // close the file and write the contents to disk.
-    await writableStream.close();
+    const fileContents = await res.blob();
+    const fileUrl = URL.createObjectURL(fileContents);
+    const anchor = document.createElement("a");
+    anchor.href = fileUrl;    // create a new handle
+    anchor.download(file);
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    URL.revokeObjectURL(fileUrl);
     term.write(`Downloaded ${fileContents.length} bytes`);
 }
 
