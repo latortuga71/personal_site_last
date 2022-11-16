@@ -64,7 +64,7 @@ async function HandleDownload(file) {
     const fileUrl = URL.createObjectURL(fileContents);
     const anchor = document.createElement("a");
     anchor.href = fileUrl;    // create a new handle
-    anchor.download(file);
+    anchor.download = file;
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);
