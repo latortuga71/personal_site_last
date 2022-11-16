@@ -69,7 +69,7 @@ async function HandleDownload(file) {
     anchor.click();
     document.body.removeChild(anchor);
     URL.revokeObjectURL(fileUrl);
-    term.write(`Downloaded ${fileContents.length} bytes`);
+    term.write(`\r\nDownloaded ${fileContents.length} bytes`);
 }
 
 async function loadFileInfo(file) { 
