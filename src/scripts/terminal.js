@@ -61,6 +61,7 @@ async function HandleDownload(file) {
         return;
     }
     const fileContents = await res.blob();
+    const size = fileContents.size;
     const fileUrl = URL.createObjectURL(fileContents);
     const anchor = document.createElement("a");
     anchor.href = fileUrl;    // create a new handle
@@ -69,7 +70,7 @@ async function HandleDownload(file) {
     anchor.click();
     document.body.removeChild(anchor);
     URL.revokeObjectURL(fileUrl);
-    term.write(`\r\nDownloaded ${fileContents.length} bytes`);
+    term.write(`\r\nDownloaded ${size} bytes`);
 }
 
 async function loadFileInfo(file) { 
