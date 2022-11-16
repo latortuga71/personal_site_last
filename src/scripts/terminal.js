@@ -55,7 +55,7 @@ const terminalWrite = (data) => {
 }
 
 async function HandleDownload(file) { 
-    const res = await fetch(file);
+    const res = await fetch("../" + file);
     if (!res.ok) {
         terminalWrite(`download: ${file}: No such file or directory`);
         return;
