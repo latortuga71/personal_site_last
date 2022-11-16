@@ -1,0 +1,31 @@
+---
+---
+<!doctype html>
+  <html>
+    <head>
+      <!-- <link rel="stylesheet" href="node_modules/xterm/css/xterm.css" /> -->
+      <!-- <script src="../../node_modules/xterm/lib/xterm.js"></script> -->
+      <style>
+        *,*::before, *::after {
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+        }
+        html,body {
+          background-color: #161b22;
+          height: 100vh;
+
+        }
+        #terminal {
+          height: 100vh;
+        }
+
+      </style>
+    </head>
+    <body>
+      <div id="terminal"></div>
+      <script>
+          import "../scripts/terminal.js";
+      </script>
+    </body>
+  </html>

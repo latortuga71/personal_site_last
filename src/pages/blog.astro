@@ -1,0 +1,52 @@
+---
+const pageTitle = "Blog";
+const randomSaying = "Collection Of Experiences And Stuff.";
+import { posts } from "../scripts/constants";
+---
+<!--https://yrachid.github.io/fallout-terminal/ -->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>::: Latortuga0x71 :::</title>
+	</head>
+	<style>
+		body {
+			background-color: #161b22;
+			color: #c9d1d9;
+		}
+		a:hover, a:visited:hover{
+			color:red;
+		}
+		a:visited {
+			color: #c9d1d9;
+		}
+	</style>
+	<body>
+		<pre>
+				  == {pageTitle} ==
+
+			{randomSaying}
+
+|=-------------------------------------------------------------------------=|
+|=-------------------------------------------------------------------------=|
+|=---------------------------=[ Latortuga0x71 ]=---------------------------=|
+|=-------------------------------------------------------------------------=|
+|=-------------------------------------------------------------------------=|
+
+
+--[ Table of Contents
+
+<a href="/">0x00 Home</a>
+<a href="/about/">0x01 About</a>
+<a href="/blog/">0x02 Blog</a>
+
+
+--[ Blog
+{posts.map(({ title, link ,issue,author}) => <pre>  {issue} <a href={`/posts/${link}`}>{title}..........................{author}</a></pre>)}
+|=[ EOF ]=---------------------------------------------------------------=|
+		</pre>
+	</body>
+</html>
