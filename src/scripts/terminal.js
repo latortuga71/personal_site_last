@@ -136,6 +136,11 @@ function HandleReturn(dataSent){
                 prompt();
                 return;
             }
+        case "pwd":
+            terminalWrite("/root");
+            prompt();
+        case "exit":
+            window.location.replace("https://latortuga.io/")
         case "clear":
             term.clear();
             prompt();
@@ -169,7 +174,7 @@ term.write(colorize(TermColors.Red,String.raw`
                                             @latortuga71   
 `));
 term.write("\r\n")
-term.write(`                           --- Normal site: https://localhost:8000/ ---`)
+term.write(`                           --- Normal site: https://latortuga.io/ ---`)
 
 
 term.write("\r\n");
