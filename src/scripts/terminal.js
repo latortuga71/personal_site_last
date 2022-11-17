@@ -137,7 +137,7 @@ function HandleReturn(dataSent){
                 return;
             }
         case "pwd":
-            terminalWrite("/root");
+            terminalWrite("/home/guest");
             prompt();
         case "exit":
             window.location.replace("https://latortuga.io/")
