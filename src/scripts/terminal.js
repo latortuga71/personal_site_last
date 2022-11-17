@@ -89,7 +89,7 @@ async function HandleLs(){
 
 function HandleBlog(){
     for (let i = 0; i < posts.length; i++){
-        let entry = `-rw-r--r--    ${posts[i].size} ${posts[i].author}  staff      39 Nov 11 20:39 ${posts[i].title}.md`
+        let entry = `-rw-r--r-- 0 ${posts[i].author}  staff      39 Nov 11 20:39 https://latortuga.io/posts/${posts[i].title}`
         terminalWrite(entry)
     }
 }

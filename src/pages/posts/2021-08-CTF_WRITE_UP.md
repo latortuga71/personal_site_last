@@ -1,14 +1,20 @@
 ---
-title: "Windows CTF Writeup"
-date: 2021-08-31T08:53:31-05:00
-draft: false
-toc: false
-images:
-tags:
-  - CTF
-  - Windows
-  - AD
+layout: ../../layouts/PostLayout.astro
 ---
+<head>
+	<style>
+		body {
+			background-color: #161b22;
+			color: #c9d1d9;
+		}
+		a:hover, a:visited:hover{
+			color:red;
+		}
+		a:visited {
+			color: #c9d1d9;
+		}
+	</style>
+</head>
 
 ## Windows AD CTF Writeup
 Got back into ctf's as of late and had alot of fun with a fairly new windows box. This windows machine is heavily focused on enumeration and active directory exploitation. The most interesting part of the challenge is you basically root the machine without ever gaining a shell on the machine itself. All of the enumeration and attacks are performed remotely. This seems like it would be similar to gaining vpn access to a network and performing your attacks through the vpn. Rather than having an implant call back to your C2. The machine is exploited using a combination of end user negligence, IT errors and common AD constrained delegation misconfiguration.
