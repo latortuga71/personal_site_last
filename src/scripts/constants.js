@@ -316,11 +316,7 @@ term.write(String.raw`
 
 export const FilesOnDisk = [
   {
-    name: 'resume.txt',
-    path: '/resume.txt',
-  },
-  {
-    name: 'otherfile.txt',
-    path: '/otherfile.txt',
-  },
+    name: 'resume.docx',
+    path: '/resume.docx',
+  }
 ];
