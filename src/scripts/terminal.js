@@ -1,7 +1,7 @@
 import { Terminal } from 'xterm/lib/xterm.js';
 import { FitAddon } from 'xterm-addon-fit/lib/xterm-addon-fit.js';
 import 'xterm/css/xterm.css';
-import { posts } from './constants';
+import { InitLog, posts } from './constants';
 import { helpMessage } from './constants';
 import { shellprompt } from './constants';
 import { jobsMessage } from './constants';
@@ -9,10 +9,9 @@ import { whoMessage } from './constants';
 import { whoamiMessage } from './constants';
 
 import {TermColors} from './constants';
-import {colorize} from './utils';
+import {colorize, sleep} from './utils';
 import { FilesOnDisk } from './constants';
 import { WebLinksAddon } from 'xterm-addon-web-links/lib/xterm-addon-web-links.js';
-
 let startOfPrompt = true;
 let currentLocationOfCursor = 1;
 let buffer = "";
@@ -54,6 +53,48 @@ const terminalWrite = (data) => {
     term.write(`\r\n${data}`)
 }
 
+async function DoInitTerm(){
+    for (let y = 0; y < InitLog.length;y++){
+        let t = await sleep(1);
+        term.write(InitLog[y]);
+    }
+    term.write("\r\n")
+    term.write(colorize(TermColors.Red,String.raw`
+ /$$                 /$$                        /$$                                /$$$$$$          /$$$$$$$$ /$$  
+| $$                | $$                       | $$                               /$$$_  $$        |_____ $$/$$$$  
+| $$       /$$$$$$ /$$$$$$   /$$$$$$  /$$$$$$ /$$$$$$  /$$   /$$ /$$$$$$  /$$$$$$| $$$$\ $$/$$   /$$    /$$|_  $$  
+| $$      |____  $|_  $$_/  /$$__  $$/$$__  $|_  $$_/ | $$  | $$/$$__  $$|____  $| $$ $$ $|  $$ /$$/   /$$/  | $$  
+| $$       /$$$$$$$ | $$   | $$  \ $| $$  \__/ | $$   | $$  | $| $$  \ $$ /$$$$$$| $$\ $$$$\  $$$$/   /$$/   | $$  
+| $$      /$$__  $$ | $$ /$| $$  | $| $$       | $$ /$| $$  | $| $$  | $$/$$__  $| $$ \ $$$ >$$  $$  /$$/    | $$  
+| $$$$$$$|  $$$$$$$ |  $$$$|  $$$$$$| $$       |  $$$$|  $$$$$$|  $$$$$$|  $$$$$$|  $$$$$$//$$/\  $$/$$/    /$$$$$$
+|________/\_______/  \___/  \______/|__/        \___/  \______/ \____  $$\_______/\______/|__/  \__|__/    |______/
+                                                                /$$  \ $$                                          
+                                                               |  $$$$$$/                                          
+                                                                \______/  
+                                            @latortuga71   
+`));
+term.write("\r\n")
+term.write(`                           --- Normal site: https://latortuga.io/ ---`)
+term.write("\r\n");
+term.write(colorize(TermColors.Green,shellprompt));
+}
+
+async function HandleExit(){
+    const res = await fetch("../" + "shutdown2.log");
+    const fileContents = await res.text();
+    const lines = fileContents.split("\n")
+    term.write("\r\nExiting")
+    for (let z = 0; z < 6; z++){
+        let t  = await sleep(100);
+        term.write(`.`);
+    }
+    term.write("\r\n")
+    for (let x = 0; x < lines.length; x++){
+        let t  = await sleep(100);
+        term.write(`${lines[x]}\r\n`);
+    }
+}
+
 async function HandleDownload(file) { 
     const res = await fetch("../" + file);
     if (!res.ok) {
@@ -73,8 +114,21 @@ async function HandleDownload(file) {
     term.write(`\r\nDownloaded ${size} bytes`);
 }
 
+
+async function HandleCat(file) { 
+    const res = await fetch("../" + file);
+    if (!res.ok) {
+        terminalWrite(`download: ${file}: No such file or directory`);
+        return;
+    }
+    const fileContents = await res.text();
+    const size = fileContents.size;
+    term.write(fileContents);
+}
+
+
 async function loadFileInfo(file) { 
-    const res = await fetch("../"+file)
+    const res = await fetch("../" + file)
     const fileContents = await res.text();
     const fileLength = fileContents.length;
     let entry = `-rw-r--r--    ${fileLength} latortuga0x71  staff      39 Nov 11 20:39 ${file}`;
@@ -136,11 +190,22 @@ function HandleReturn(dataSent){
                 prompt();
                 return;
             }
+        case "cat":
+            if (argv.length > 1) {
+                HandleCat(argv[1]).then(() => prompt());
+                return;
+            } else {
+                terminalWrite("download: Missing file arg.")
+                prompt();
+                return;
+            }
         case "pwd":
             terminalWrite("/home/guest");
             prompt();
+            return;
         case "exit":
-            window.location.replace("https://latortuga.io/")
+            HandleExit().then(() => window.location.replace("https://latortuga.io/") );
+            return;
         case "clear":
             term.clear();
             prompt();
@@ -159,26 +224,7 @@ term.loadAddon(linkAddon);
 
 term.open(document.getElementById('terminal'));
 fitAddon.fit();
-term.write(colorize(TermColors.Red,String.raw`
- /$$                 /$$                        /$$                                /$$$$$$          /$$$$$$$$ /$$  
-| $$                | $$                       | $$                               /$$$_  $$        |_____ $$/$$$$  
-| $$       /$$$$$$ /$$$$$$   /$$$$$$  /$$$$$$ /$$$$$$  /$$   /$$ /$$$$$$  /$$$$$$| $$$$\ $$/$$   /$$    /$$|_  $$  
-| $$      |____  $|_  $$_/  /$$__  $$/$$__  $|_  $$_/ | $$  | $$/$$__  $$|____  $| $$ $$ $|  $$ /$$/   /$$/  | $$  
-| $$       /$$$$$$$ | $$   | $$  \ $| $$  \__/ | $$   | $$  | $| $$  \ $$ /$$$$$$| $$\ $$$$\  $$$$/   /$$/   | $$  
-| $$      /$$__  $$ | $$ /$| $$  | $| $$       | $$ /$| $$  | $| $$  | $$/$$__  $| $$ \ $$$ >$$  $$  /$$/    | $$  
-| $$$$$$$|  $$$$$$$ |  $$$$|  $$$$$$| $$       |  $$$$|  $$$$$$|  $$$$$$|  $$$$$$|  $$$$$$//$$/\  $$/$$/    /$$$$$$
-|________/\_______/  \___/  \______/|__/        \___/  \______/ \____  $$\_______/\______/|__/  \__|__/    |______/
-                                                                /$$  \ $$                                          
-                                                               |  $$$$$$/                                          
-                                                                \______/  
-                                            @latortuga71   
-`));
-term.write("\r\n")
-term.write(`                           --- Normal site: https://latortuga.io/ ---`)
 
-
-term.write("\r\n");
-term.write(colorize(TermColors.Green,shellprompt));
 
 term.onData((data) => {
     if (currentLocationOfCursor == 1) {
@@ -232,5 +278,5 @@ term.onKey((keyObject) => {
 
 
 
-
+DoInitTerm();
 
