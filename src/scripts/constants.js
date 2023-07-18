@@ -230,6 +230,14 @@ export const posts = [
     author: "latortuga0x71",
     issue: "0x027"
  },
+ {
+    title: "2023-07-18-BugHunting001",
+    size: 10848,
+    postedData: "2023-07-18T08:53:31-05:00",
+    link: "/posts/2023-07-18-BugHunting001",
+    author: "latortuga0x71",
+    issue: "0x028"
+ },
 ]
 
 
