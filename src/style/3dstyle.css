@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* cannot scroll past limit */
+html,
+body {
+    overflow: hidden;
+}
+
+/* fixed top left canvas*/
+.webgl {
+    position: fixed;
+    top:0;
+    left:0;
+    outline: none;
+}
+
+body {
+    background: black;
+}
