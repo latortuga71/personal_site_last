@@ -188,6 +188,7 @@ function InitGameObject(){
     GameObject.Renderer.setPixelRatio(Math.min(window.devicePixelRatio,2)); // max set to 2 
     // Set Camera Position
     GameObject.Camera.position.z = 10;
+    GameObject.Camera.position.y = 10;
     // Add Camera To Scene
     //const axisHelper = new THREE.AxesHelper();
     //GameObject.Scene.add(axisHelper);
