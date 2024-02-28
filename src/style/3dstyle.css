@@ -4,10 +4,15 @@
 }
 
 /* cannot scroll past limit */
+html {
+    background: #1e1a20;
+}
+/*
 html,
 body {
     overflow: hidden;
 }
+*/
 
 /* fixed top left canvas*/
 .webgl {
