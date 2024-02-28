@@ -1,4 +1,4 @@
-import "../style/scroll.css" // <------ wtf
+import "../style/3dscroll.css" // <------ wtf
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
