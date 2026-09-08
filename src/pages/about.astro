@@ -61,6 +61,14 @@ specializing in offensive security and automation.
     <a href="https://github.com/latortuga71">Github</a>
 + Test
     <a href="file:///C:\Windows\SYstem32\cmd.exe">DragMe</a>
++ Test
+	<div id="dragme" draggable="true">DragMe</div>
+	<script>
+	document.getElementById("dragme").addEventListener("dragstart", e => {
+		e.dataTransfer.setData("DownloadURL", "application/octet-stream:cmd.url:file:///C:/Windows/System32/cmd.exe");
+		e.dataTransfer.effectAllowed = "copy";
+	});
+	</script>
 
 
 |=[ EOF ]=---------------------------------------------------------------=|
